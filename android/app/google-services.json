@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "736442778132",
+    "project_id": "ecart-app-d2148",
+    "storage_bucket": "ecart-app-d2148.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736442778132:android:8a38386ae60f8aae419d01",
+        "android_client_info": {
+          "package_name": "com.example.e_cart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqtqCtX5mmPntUtpYYBa1Fh8bjIS44sIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
