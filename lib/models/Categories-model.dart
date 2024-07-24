@@ -23,15 +23,14 @@ Map<String,dynamic> toMap(){
     'updatedAt':updatedAt,
   };
 }
-
 // create a usermodel instance from a JSON map
-factory CategoriesModel.fromMap(Map<String ,dynamic> json){
-  return CategoriesModel(
-      categoryId: json['categoryId'],
-      categoryImg: json['categoryImg'],
-      categoryName: json['categoryName']
-      , createdAt: json['createdAt'],
-      updatedAt: json['updatedAt']);
-}
+  factory CategoriesModel.fromMap(Map<String ,dynamic> json){
+    return CategoriesModel(
+        categoryId: json['categoryId'],
+        categoryImg: json['categoryImg'],
+        categoryName: json['categoryName']
+        , createdAt: json['createdAt'],
+        updatedAt: json['updatedAt']);
+  }
 
 }

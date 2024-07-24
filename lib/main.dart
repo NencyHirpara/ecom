@@ -1,10 +1,13 @@
+import 'package:e_cart/screens/auth-ui/onboarding_screen.dart';
 import 'package:e_cart/screens/auth-ui/sign-up-screen.dart';
 import 'package:e_cart/screens/auth-ui/splash_screen.dart';
 import 'package:e_cart/utils/app_constant.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 
 void main() async{
@@ -24,7 +27,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: splashscreen(),
+      home:  splashscreen(),
       builder: EasyLoading.init(),
     );
   }
@@ -39,6 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent,statusBarIconBrightness:Brightness.dark));
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppConstant.appmaincolor,
@@ -49,3 +53,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+

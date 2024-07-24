@@ -35,51 +35,50 @@ class categoryWidget extends StatelessWidget {
             );
           }
           if(snapshot.data != null){
-            return MediaQuery(
-              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-              child: Container(
-                height: 150,
-                child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  itemCount: snapshot.data!.docs.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                    CategoriesModel categoriesModel = CategoriesModel(
-                        categoryId: snapshot.data!.docs[index]['categoryId'],
-                        categoryImg: snapshot.data!.docs[index]['categoryImg'],
-                        categoryName: snapshot.data!.docs[index]['categoryName'],
-                        createdAt: snapshot.data!.docs[index]['createdAt'],
-                        updatedAt: snapshot.data!.docs[index]['updatedAt']);
-                      return Row(
-                       children: [
-                         GestureDetector(
-                           onTap: () {
-                             Get.to(() =>AllSingleCategaryProduct(categoryId: categoriesModel.categoryId));
+            return Container(
+            //  padding: EdgeInsets.only(top: 20,bottom: 20),
+             height: 150,
+              child: ListView.builder(
+                physics: BouncingScrollPhysics(),
+                itemCount: snapshot.data!.docs.length,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                  CategoriesModel categoriesModel = CategoriesModel(
+                      categoryId: snapshot.data!.docs[index]['categoryId'],
+                      categoryImg: snapshot.data!.docs[index]['categoryImg'],
+                      categoryName: snapshot.data!.docs[index]['categoryName'],
+                      createdAt: snapshot.data!.docs[index]['createdAt'],
+                      updatedAt: snapshot.data!.docs[index]['updatedAt']);
+                    return Row(
+                     children: [
+                       GestureDetector(
+                         onTap: () {
+                           Get.to(() =>AllSingleCategaryProduct(categoryId: categoriesModel.categoryId));
 
-                           },
-                           child: Padding(
-                             padding: const EdgeInsets.all(8.0),
-                             child: Container(
-                               child: TransparentImageCard(
-                                 borderRadius: 15.0,
-                                 width: 100,
-                                 height:250,
-                                 tagSpacing: 10,
-                                 contentMarginTop: 90,
-                                 imageProvider:CachedNetworkImageProvider(
-                                   categoriesModel.categoryImg,
-                                 ),
-                                 title: Center(child: Text(categoriesModel.categoryName,overflow: TextOverflow.ellipsis,
-                                 style: TextStyle(color:Colors.white),)),
+                         },
+                         child: Padding(
+                           padding: const EdgeInsets.all(8.0),
+                           child: Container(
+                             height: 150,
+                             child: TransparentImageCard(
+                               borderRadius: 15.0,
+                               width: 100,
+                               height:250,
+                               tagSpacing: 10,
+                               contentMarginTop: 90,
+                               imageProvider:CachedNetworkImageProvider(
+                                 categoriesModel.categoryImg,
                                ),
+                               title: Center(child: Text(categoriesModel.categoryName,overflow: TextOverflow.ellipsis,
+                               style: TextStyle(color:Colors.white),)),
                              ),
                            ),
-                         )
-                       ],
-                      );
-                    },
-                ),
+                         ),
+                       )
+                     ],
+                    );
+                  },
               ),
             );
           }

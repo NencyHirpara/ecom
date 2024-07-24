@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:intl/intl.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 import '../../controllers/cart-price-controller.dart';
 import '../../models/Cart_model.dart';
@@ -30,8 +31,14 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+
+ Razorpay _razorpay = Razorpay();
+
   @override
   Widget build(BuildContext context) {
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
     return  MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(
@@ -281,13 +288,30 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
 
                           String customerToken = await getCustomerDeviceToken();
 
-                          placeOrder(
-                            context:context,
-                            customerName : name,
-                            customerPhone : phone,
-                            customerAddress : address,
-                            customerDeviceToken:customerToken,
-                          );
+                    //  String  amount =   formmater.format( productPriceController.totalPrice.value*100) as String;
+                         // int amount = productPriceController.totalPrice.value * 100; // Razorpay expects amount in paise
+                          int amount = (productPriceController.totalPrice.value * 100).toInt(); // Convert to int
+
+
+                          var options = {
+                            'key': 'rzp_test_YghCO1so2pwPnx',
+                            'amount': amount,
+                            'name': 'ECart',
+                            'description': 'Fine T-Shirt',
+                            'prefill': {
+                              'contact': '8888888888',
+                              'email': 'test@razorpay.com'
+                            }
+                          };
+
+                          _razorpay.open(options);
+                          // placeOrder(
+                          //   context:context,
+                          //   customerName : name,
+                          //   customerPhone : phone,
+                          //   customerAddress : address,
+                          //   customerDeviceToken:customerToken,
+                          // );
 
                         }else{
                           print('please fill all detail');
@@ -302,5 +326,50 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
           ),
         )
     );
+  }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) async {
+    // Get user details for the order placement
+    String name = nameController.text.trim();
+    String phone = phoneController.text.trim();
+    String address = addressController.text.trim();
+    String customerToken = await getCustomerDeviceToken();
+
+    // Place the order
+    placeOrder(
+      context: context,
+      customerName: name,
+      customerPhone: phone,
+      customerAddress: address,
+      customerDeviceToken: customerToken,
+    );
+
+    // Delete the cart items after placing the order
+    var cartCollection = FirebaseFirestore.instance
+        .collection('cart')
+        .doc(user!.uid)
+        .collection('cartOrders');
+
+    var snapshots = await cartCollection.get();
+    for (var doc in snapshots.docs) {
+      await doc.reference.delete();
+    }
+
+    Get.snackbar('Success', 'Payment successful and cart cleared');
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    // Handle payment error
+    Get.snackbar('Error', 'Payment failed');
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    // Handle external wallet selection
+  }
+
+  @override
+  void dispose() {
+    _razorpay.clear(); // Removes all listeners
+    super.dispose();
   }
 }

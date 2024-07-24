@@ -18,7 +18,7 @@ class signinscreen extends StatefulWidget {
   State<signinscreen> createState() => _signinscreenState();
 }
 class _signinscreenState extends State<signinscreen> {
-  bool _passwordVisible = false;
+  bool _passwordVisible = true;
   SignInController signInController = Get.put(SignInController());
   GetUserDateContoller getUserDateContoller = Get.put(GetUserDateContoller());
   TextEditingController userEmail = TextEditingController();

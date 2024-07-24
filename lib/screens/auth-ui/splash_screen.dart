@@ -30,13 +30,13 @@ class _splashscreenState extends State<splashscreen> {
       final GetUserDateContoller getUserDateContoller = Get.put(GetUserDateContoller());
       var userdata = await getUserDateContoller.getUserData(user!.uid);
       if(userdata[0]['isAdmin']== true){
-        Get.offAll(() =>AdminMainScreen());
+        Get.offAll(() =>MainScreen());
 
       }else{
         Get.offAll(() => MainScreen());
       }
     }else{
-      Get.offAll(() => welcomescreem());
+      Get.offAll(() => MainScreen());
 
     }
   }
