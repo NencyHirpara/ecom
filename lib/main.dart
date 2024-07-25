@@ -1,5 +1,3 @@
-import 'package:e_cart/screens/auth-ui/onboarding_screen.dart';
-import 'package:e_cart/screens/auth-ui/sign-up-screen.dart';
 import 'package:e_cart/screens/auth-ui/splash_screen.dart';
 import 'package:e_cart/utils/app_constant.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 
 void main() async{

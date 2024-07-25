@@ -73,7 +73,8 @@ class _AllFlashSaleProductState extends State<AllFlashSaleProduct> {
                               padding: const EdgeInsets.only(top: 5,left: 15),
                               child: Container(
                                 child: FillImageCard(
-                                    imageProvider: CachedNetworkImageProvider(_productmodel.productImages[0]),
+                                  color: Colors.black12,
+                                  imageProvider: CachedNetworkImageProvider(_productmodel.productImages[0]),
                                   width:150,
                                   heightImage: 160,
                                   borderRadius: 20,

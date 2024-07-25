@@ -116,7 +116,7 @@ class _CartScreenState extends State<CartScreen> {
                                     SizedBox(height: 6),
                                     Text(cartModel.categoryName,style: TextStyle(fontWeight: FontWeight.w400,fontSize: 15)),
                                     SizedBox(height: 5,),
-                                    Text('RS: ${cartModel.isSale?
+                                    Text('\u20B9 ${cartModel.isSale?
                                     cartModel.salePrice:cartModel.fullPrice}',style: TextStyle(fontWeight: FontWeight.w400,fontSize: 15)),
                                     Row(
                                       children: [
@@ -170,8 +170,7 @@ class _CartScreenState extends State<CartScreen> {
                                   SizedBox(width: 4),
                                   Text('(${cartModel.productQuantity})'),
                                   SizedBox(width:220),
-                                  Text(
-                                      formmater.format(cartModel.productTotalPrice),
+                                  Text( '\u20B9${formmater.format(cartModel.productTotalPrice)}',
                                       style: TextStyle(fontSize:15,fontWeight: FontWeight.w800)
                                   ),
                                 ],
@@ -190,35 +189,59 @@ class _CartScreenState extends State<CartScreen> {
 
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text('Total'),
-                SizedBox(width: 30,),
-                Obx(() =>  Text(
-                  formmater.format( productPriceController.totalPrice.value),
-                ),),
-                SizedBox(width: 110),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: 150,
-                    height: 40,
-                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                     color: AppConstant.appsecondaycolor
-                   ),
-                    child: TextButton(
-                      onPressed: () {
-                           Get.to(() => CheckOutScreen() );
-                      },
-                        child: Text('CheckOut',style: TextStyle(color: AppConstant.apptextcolor),)),
+          child: Card(
+            child: Container(
+              height: 90,
+              child: Column(
+                children: [
+                  Container(
+                    child: Row(
+                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(width: 5,),
+                        Text('Total',style: TextStyle(
+                            fontWeight: FontWeight.w800
+                        ),),
+                        SizedBox(width: 280),
+                        Obx(() =>  Text(
+                          '\u20B9${ formmater.format( productPriceController.totalPrice.value)}',style: TextStyle(
+                          fontWeight: FontWeight.w800
+                        ),
+                        ),),
+                      ],
+                    ),
+            
                   ),
-                )
-              ],
+                  SizedBox(height: 10,),
+                  Container(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: double.infinity,
+                     //   height: 40,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: AppConstant.appsecondaycolor
+                        ),
+                        child: TextButton(
+                            onPressed: () {
+                              Get.to(() => CheckOutScreen() );
+                            },
+                            child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.shopping_cart,color: Colors.white,),
+                                SizedBox(width: 5),
+                                Text('Proceed To CheckOut',style: TextStyle(color: AppConstant.apptextcolor),),
+                              ],
+                            )),
+                      ),
+                    ),
+                  ),
+            
+                ],
+              ),
             ),
-
           ),
         ),
 

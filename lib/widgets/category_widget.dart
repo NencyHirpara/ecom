@@ -57,22 +57,19 @@ class categoryWidget extends StatelessWidget {
                            Get.to(() =>AllSingleCategaryProduct(categoryId: categoriesModel.categoryId));
 
                          },
-                         child: Padding(
-                           padding: const EdgeInsets.all(8.0),
-                           child: Container(
-                             height: 150,
-                             child: TransparentImageCard(
-                               borderRadius: 15.0,
-                               width: 100,
-                               height:250,
-                               tagSpacing: 10,
-                               contentMarginTop: 90,
-                               imageProvider:CachedNetworkImageProvider(
-                                 categoriesModel.categoryImg,
-                               ),
-                               title: Center(child: Text(categoriesModel.categoryName,overflow: TextOverflow.ellipsis,
-                               style: TextStyle(color:Colors.white),)),
+                         child: SizedBox(
+                           width: 120,
+                           child: TransparentImageCard(
+                             borderRadius: 15.0,
+                             width: 100,
+                             height:150,
+                             tagSpacing: 10,
+                             contentMarginTop: 90,
+                             imageProvider:CachedNetworkImageProvider(
+                               categoriesModel.categoryImg,
                              ),
+                             title: Center(child: Text(categoriesModel.categoryName,overflow: TextOverflow.ellipsis,
+                             style: TextStyle(color:Colors.white),)),
                            ),
                          ),
                        )

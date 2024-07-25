@@ -165,40 +165,89 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
             return Container();
 
           },),
-
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text('Total'),
-                SizedBox(width: 30,),
-                Obx(() =>  Text(
-                  formmater.format( productPriceController.totalPrice.value),
-                ),),
-                SizedBox(width: 110),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: 150,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: AppConstant.appsecondaycolor
+          child: Card(
+            child: Container(
+              height: 90,
+              child: Column(
+                children: [
+                  Container(
+                    child: Row(
+                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(width: 5,),
+                        Text('Total',style: TextStyle(
+                            fontWeight: FontWeight.w800
+                        ),),
+                        SizedBox(width: 280),
+                        Obx(() =>  Text(
+                          '\u20B9${ formmater.format( productPriceController.totalPrice.value)}',style: TextStyle(
+                            fontWeight: FontWeight.w800
+                        ),
+                        ),),
+                      ],
                     ),
-                    child: TextButton(
-                        onPressed: () {
-                          ShowCustomBottalSheet();
-                        },
-                        child: Text('Confirm Order',style: TextStyle(color: AppConstant.apptextcolor),)),
-                  ),
-                )
-              ],
-            ),
 
+                  ),
+                  SizedBox(height: 10,),
+                  Container(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: double.infinity,
+                        //   height: 40,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: AppConstant.appsecondaycolor
+                        ),
+                        child:TextButton(
+                            onPressed: () {ShowCustomBottalSheet();},
+                            child: Text('Confirm Order',style: TextStyle(color: AppConstant.apptextcolor),)),
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
+            ),
           ),
         ),
+
+        // bottomNavigationBar: Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: Container(
+        //     child: Row(
+        //       crossAxisAlignment: CrossAxisAlignment.center,
+        //       children: [
+        //         Text('Total'),
+        //         SizedBox(width: 30,),
+        //         Obx(() =>  Text(
+        //           formmater.format( productPriceController.totalPrice.value),
+        //         ),),
+        //         SizedBox(width: 110),
+        //         Padding(
+        //           padding: const EdgeInsets.all(8.0),
+        //           child: Container(
+        //             width: 150,
+        //             height: 40,
+        //             decoration: BoxDecoration(
+        //                 borderRadius: BorderRadius.circular(20),
+        //                 color: AppConstant.appsecondaycolor
+        //             ),
+        //             child: TextButton(
+        //                 onPressed: () {
+        //                   ShowCustomBottalSheet();
+        //                 },
+        //                 child: Text('Confirm Order',style: TextStyle(color: AppConstant.apptextcolor),)),
+        //           ),
+        //         )
+        //       ],
+        //     ),
+        //
+        //   ),
+        // ),
 
       ),
     );
@@ -355,7 +404,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
       await doc.reference.delete();
     }
 
-    Get.snackbar('Success', 'Payment successful and cart cleared');
+    Get.snackbar('Success', 'Payment successful ');
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {

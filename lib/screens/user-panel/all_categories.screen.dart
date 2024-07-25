@@ -38,50 +38,44 @@ class AllCategoriesScreen extends StatelessWidget {
                 return Text('No categorie availabel');
               }
               if(snapshot.data != null){
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                  crossAxisSpacing: 2,
-                    mainAxisSpacing: 3,
-                    childAspectRatio: 0.85),
-                    shrinkWrap: true,
-                   itemCount: snapshot.data!.docs.length,
-                    physics: BouncingScrollPhysics(),
+              return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                crossAxisSpacing: 2,
+                  mainAxisSpacing: 3,
+                  childAspectRatio: 0.85),
+                  shrinkWrap: true,
+                 itemCount: snapshot.data!.docs.length,
+                  physics: BouncingScrollPhysics(),
 
-                    itemBuilder:(context, index) {
-                      var product = snapshot.data!.docs[index];
-                      CategoriesModel categoriesModel = CategoriesModel(
-                          categoryId: product['categoryId'],
-                          categoryImg: product['categoryImg'],
-                          categoryName: product['categoryName'],
-                          createdAt: product['createdAt'],
-                          updatedAt: product['updatedAt']);
-                      return Row(
-                        children: [
-                          GestureDetector(
-                            onTap:() {
-                              Get.to(() =>AllSingleCategaryProduct(categoryId: categoriesModel.categoryId));
-                            },
-                            child: Padding(
-                              padding:  EdgeInsets.all(8.0),
-                              child: Container(
-                                height: 500,
-                                child: FillImageCard(
-                                  borderRadius: 20,
-                                  width: 150 ,
-                                  heightImage:160 ,
-                                  imageProvider: CachedNetworkImageProvider(categoriesModel.categoryImg),
-                                  title: Text(categoriesModel.categoryName),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      );
-                    }, ),
-              );
+                  itemBuilder:(context, index) {
+                    var product = snapshot.data!.docs[index];
+                    CategoriesModel categoriesModel = CategoriesModel(
+                        categoryId: product['categoryId'],
+                        categoryImg: product['categoryImg'],
+                        categoryName: product['categoryName'],
+                        createdAt: product['createdAt'],
+                        updatedAt: product['updatedAt']);
+                    return GestureDetector(
+                      onTap:() {
+                        Get.to(() =>AllSingleCategaryProduct(categoryId: categoriesModel.categoryId));
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20), // Apply border radius here
+                        child: Container(
+                          margin: EdgeInsets.all(8.0),
+                          child: FillImageCard(
+                            color: Colors.black12,
+                            borderRadius: 20,
+                            width: double.infinity ,
+                            heightImage:160 ,
+                            imageProvider: CachedNetworkImageProvider(categoriesModel.categoryImg),
+                            title: Text(categoriesModel.categoryName),
+                          ),
+                        ),
+                      ),
+                    );
+                  }, );
               }
               return Container();
             },),

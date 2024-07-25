@@ -58,23 +58,21 @@ class FlashSaleWidget extends StatelessWidget {
                         onTap: () =>   Get.to(() => ProductDetailScreen(Productmodel: _productmodel)),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 10),
-                          child: Container(
-                            child: FillImageCard(
-                              borderRadius: 20,
-                                width: 150,
-                                heightImage:180,
-                                imageProvider: CachedNetworkImageProvider(_productmodel.productImages[0]),
-                            title: Text(_productmodel.productName,overflow: TextOverflow.ellipsis),
-                              footer: Row(
-                                children: [
-                                   Text('RS:${_productmodel.salePrice}',style: TextStyle(fontSize: 10,fontWeight: FontWeight.w500),),
-                                  SizedBox(width: 4),
-                                  Text('${_productmodel.fullPrice}',
-                                    style: TextStyle(decoration: TextDecoration.lineThrough,fontSize: 10, color: Colors.red),)
-                                ],
-                              ),
+                          child: FillImageCard(
+                            color: Colors.black12,
+                            borderRadius: 20,
+                              width: 150,
+                              heightImage:180,
+                              imageProvider: CachedNetworkImageProvider(_productmodel.productImages[0]),
+                          title: Text(_productmodel.productName,overflow: TextOverflow.ellipsis),
+                            footer: Row(
+                              children: [
+                                 Text('RS:${_productmodel.salePrice}',style: TextStyle(fontSize: 10,fontWeight: FontWeight.w500),),
+                                SizedBox(width: 4),
+                                Text('${_productmodel.fullPrice}',
+                                  style: TextStyle(decoration: TextDecoration.lineThrough,fontSize: 10, color: Colors.red),)
+                              ],
                             ),
-
                           ),
                         ),
                       ),

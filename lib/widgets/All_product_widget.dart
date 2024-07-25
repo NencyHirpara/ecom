@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:image_card/image_card.dart';
@@ -63,6 +64,7 @@ class AllProductWidget extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 5,left: 15),
                         child: Container(
                           child: FillImageCard(
+                            color: Colors.black12,
                             imageProvider: CachedNetworkImageProvider(_productmodel.productImages[0]),
                             width:160,
                             heightImage:150,

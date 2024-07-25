@@ -74,16 +74,14 @@ class _AllProducScreenState extends State<AllProducScreen> {
                               },
                             child: Padding(
                               padding: const EdgeInsets.only(left: 20,top: 5),
-                              child: Container(
-                                height: 300,
-                                child: FillImageCard(
-                                   borderRadius: 19,
-                                    heightImage: 160,
-                                    width: 150,
-                                    title: Text(_productmodel.productName,overflow: TextOverflow.ellipsis),
-                                    footer: Text('MRP: '+_productmodel.fullPrice),
-                                    imageProvider:CachedNetworkImageProvider(_productmodel.productImages[0])),
-                              ),
+                              child: FillImageCard(
+                                 borderRadius: 19,
+                                  color: Colors.black12,
+                                  heightImage: 150,
+                                  width: 150,
+                                  title: Text(_productmodel.productName,overflow: TextOverflow.ellipsis),
+                                  footer: Text('MRP: '+_productmodel.fullPrice),
+                                  imageProvider:CachedNetworkImageProvider(_productmodel.productImages[0])),
                             ),
                           ),
                         ],
